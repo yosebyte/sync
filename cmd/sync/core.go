@@ -32,14 +32,12 @@ func syncFiles(ctx context.Context, src, dst string) (int, int, error) {
 		return 0, 0, err
 	}
 	count, skipped := 0, 0
-	err := filepath.Walk(src, func(path string, info os.FileInfo, err error) error {
-		if err != nil || info.IsDir() {
-			return err
+	err := filepath.Walk(src, func(path string, info os.FileInfo, walkErr error) error {
+		if walkErr != nil || info.IsDir() {
+			return walkErr
 		}
-		select {
-		case <-ctx.Done():
+		if ctx.Err() != nil {
 			return ctx.Err()
-		default:
 		}
 		rel, err := filepath.Rel(src, path)
 		if err != nil {
