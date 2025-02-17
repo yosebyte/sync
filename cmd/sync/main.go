@@ -74,10 +74,10 @@ func getExitInfo() {
 	logger.Info(`Version: %v %v/%v
 
 Usage:
-    sync "cmd://<ivl=hour>&<src=dir>&<dst=dir>"
+    sync "cmd://?<ivl=hour>&<src=dir>&<dst=dir>"
 
 Example:
-    sync "cmd://ivl=12&src=/path/to/source&dst=/path/to/target"
+    sync "cmd://?ivl=12&src=/path/to/source&dst=/path/to/target"
 `, version, runtime.GOOS, runtime.GOARCH)
 	os.Exit(1)
 }
